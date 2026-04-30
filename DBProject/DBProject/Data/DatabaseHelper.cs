@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Configuration;
 
-public class DatabaseHelper
+public static class DatabaseHelper
 {
     public static SqlConnection GetConnection()
     {
