@@ -67,6 +67,25 @@ namespace DBProject
             //DoctorRepository docRepo = new DoctorRepository();
 
             //docRepo.TestGetAllDoctors();
+            //Console.WriteLine("\n=== Inserting New Doctor ===\n");
+            //bool insertResult = docRepo.InsertDoctor("999999999", "Mohamed", "Salah", "Surgery", 1);
+            //Console.WriteLine(insertResult ? "Insert successful!" : "Insert failed!");
+
+            //docRepo.TestGetAllDoctors();
+
+            //Console.WriteLine("\n=== Updating Doctor ===\n");
+            //docRepo.UpdateDoctor("999999999", specialty: "Cardiology");
+            //docRepo.TestGetAllDoctors();
+            //docRepo.UpdateDoctor("999999999", firstName: "Ali", deptId: 3);
+            //docRepo.TestGetAllDoctors();
+            //docRepo.UpdateDoctor("999999999", lastName: "Ahmed", specialty: "Neurology", deptId: 1);
+            //docRepo.TestGetAllDoctors();
+
+            //Console.WriteLine("\n=== Deleting Doctor ===\n");
+            //bool deleteResult = docRepo.DeleteDoctor("999999999");
+            //Console.WriteLine(deleteResult ? "Delete successful!" : "Delete failed!");
+
+            //docRepo.TestGetAllDoctors();
 
             #endregion
 

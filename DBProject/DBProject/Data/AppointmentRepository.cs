@@ -124,82 +124,82 @@ namespace DBProject.Data
             return tbl_Appointments;
         }
 
-        public bool InsertAppointment(DateTime apptDate, TimeSpan apptTime, string status, string patientId, string doctorId)
-        {
-            SqlCommand cmd = new SqlCommand(@"
-                INSERT INTO Appointment (ApptDate, ApptTime, Status, PatientID, DoctorID) 
-                VALUES (@ApptDate, @ApptTime, @Status, @PatientID, @DoctorID)", conn);
+        //public bool InsertAppointment(DateTime apptDate, TimeSpan apptTime, string status, string patientId, string doctorId)
+        //{
+        //    SqlCommand cmd = new SqlCommand(@"
+        //        INSERT INTO Appointment (ApptDate, ApptTime, Status, PatientID, DoctorID) 
+        //        VALUES (@ApptDate, @ApptTime, @Status, @PatientID, @DoctorID)", conn);
 
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@ApptDate", apptDate);
-            cmd.Parameters.AddWithValue("@ApptTime", apptTime);
-            cmd.Parameters.AddWithValue("@Status", status);
-            cmd.Parameters.AddWithValue("@PatientID", patientId);
-            cmd.Parameters.AddWithValue("@DoctorID", doctorId);
+        //    cmd.CommandType = CommandType.Text;
+        //    cmd.Parameters.AddWithValue("@ApptDate", apptDate);
+        //    cmd.Parameters.AddWithValue("@ApptTime", apptTime);
+        //    cmd.Parameters.AddWithValue("@Status", status);
+        //    cmd.Parameters.AddWithValue("@PatientID", patientId);
+        //    cmd.Parameters.AddWithValue("@DoctorID", doctorId);
 
-            try
-            {
-                conn.Open();
-                int rowsAffected = cmd.ExecuteNonQuery();
-                return rowsAffected > 0;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
+        //    try
+        //    {
+        //        conn.Open();
+        //        int rowsAffected = cmd.ExecuteNonQuery();
+        //        return rowsAffected > 0;
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+        //}
 
-        public bool UpdateAppointment(int apptId, DateTime apptDate, TimeSpan apptTime, string status, string patientId, string doctorId)
-        {
-            SqlCommand cmd = new SqlCommand(@"
-                UPDATE Appointment 
-                SET ApptDate = @ApptDate, 
-                    ApptTime = @ApptTime, 
-                    Status = @Status, 
-                    PatientID = @PatientID, 
-                    DoctorID = @DoctorID
-                WHERE ApptID = @ApptID", conn);
+        //public bool UpdateAppointment(int apptId, DateTime apptDate, TimeSpan apptTime, string status, string patientId, string doctorId)
+        //{
+        //    SqlCommand cmd = new SqlCommand(@"
+        //        UPDATE Appointment 
+        //        SET ApptDate = @ApptDate, 
+        //            ApptTime = @ApptTime, 
+        //            Status = @Status, 
+        //            PatientID = @PatientID, 
+        //            DoctorID = @DoctorID
+        //        WHERE ApptID = @ApptID", conn);
 
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@ApptID", apptId);
-            cmd.Parameters.AddWithValue("@ApptDate", apptDate);
-            cmd.Parameters.AddWithValue("@ApptTime", apptTime);
-            cmd.Parameters.AddWithValue("@Status", status);
-            cmd.Parameters.AddWithValue("@PatientID", patientId);
-            cmd.Parameters.AddWithValue("@DoctorID", doctorId);
+        //    cmd.CommandType = CommandType.Text;
+        //    cmd.Parameters.AddWithValue("@ApptID", apptId);
+        //    cmd.Parameters.AddWithValue("@ApptDate", apptDate);
+        //    cmd.Parameters.AddWithValue("@ApptTime", apptTime);
+        //    cmd.Parameters.AddWithValue("@Status", status);
+        //    cmd.Parameters.AddWithValue("@PatientID", patientId);
+        //    cmd.Parameters.AddWithValue("@DoctorID", doctorId);
 
-            try
-            {
-                conn.Open();
-                int rowsAffected = cmd.ExecuteNonQuery();
-                return rowsAffected > 0;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
+        //    try
+        //    {
+        //        conn.Open();
+        //        int rowsAffected = cmd.ExecuteNonQuery();
+        //        return rowsAffected > 0;
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+        //}
 
-        public bool DeleteAppointment(int apptId)
-        {
-            SqlCommand cmd = new SqlCommand(@"
-                DELETE FROM Appointment 
-                WHERE ApptID = @ApptID", conn);
+        //public bool DeleteAppointment(int apptId)
+        //{
+        //    SqlCommand cmd = new SqlCommand(@"
+        //        DELETE FROM Appointment 
+        //        WHERE ApptID = @ApptID", conn);
 
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@ApptID", apptId);
+        //    cmd.CommandType = CommandType.Text;
+        //    cmd.Parameters.AddWithValue("@ApptID", apptId);
 
-            try
-            {
-                conn.Open();
-                int rowsAffected = cmd.ExecuteNonQuery();
-                return rowsAffected > 0;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
+        //    try
+        //    {
+        //        conn.Open();
+        //        int rowsAffected = cmd.ExecuteNonQuery();
+        //        return rowsAffected > 0;
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+        //}
 
         public void TestGetAllAppointments()
         {

@@ -187,20 +187,33 @@ namespace DBProject.Data
             }
         }
 
-        public bool UpdatePatient(string patientId, string firstName, string lastName, DateTime? dob)
+        public bool UpdatePatient(string patientId, string firstName = null, string lastName = null, DateTime? dob = null)
         {
-            SqlCommand cmd = new SqlCommand(@"
+            string setClause = "";
+
+            if (!string.IsNullOrEmpty(firstName))
+                setClause += "FirstName = @FirstName, ";
+            if (!string.IsNullOrEmpty(lastName))
+                setClause += "LastName = @LastName, ";
+            if (dob.HasValue)
+                setClause += "DOB = @DOB, ";
+
+            setClause = setClause.TrimEnd(',', ' ');
+
+            SqlCommand cmd = new SqlCommand($@"
         UPDATE Patient 
-        SET FirstName = @FirstName, 
-            LastName = @LastName, 
-            DOB = @DOB
+        SET {setClause}
         WHERE PatientID = @PatientID", conn);
 
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@PatientID", patientId);
-            cmd.Parameters.AddWithValue("@FirstName", firstName);
-            cmd.Parameters.AddWithValue("@LastName", lastName);
-            cmd.Parameters.AddWithValue("@DOB", (object)dob ?? DBNull.Value);
+
+            if (!string.IsNullOrEmpty(firstName))
+                cmd.Parameters.AddWithValue("@FirstName", firstName);
+            if (!string.IsNullOrEmpty(lastName))
+                cmd.Parameters.AddWithValue("@LastName", lastName);
+            if (dob.HasValue)
+                cmd.Parameters.AddWithValue("@DOB", dob.Value);
 
             try
             {
@@ -213,7 +226,6 @@ namespace DBProject.Data
                 conn.Close();
             }
         }
-
         public bool UpdatePatientPhone(string patientId, string oldPhone, string newPhone)
         {
             SqlCommand cmd = new SqlCommand(@"
