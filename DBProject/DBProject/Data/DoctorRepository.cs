@@ -20,6 +20,7 @@ namespace DBProject.Data
             tbl_Doctors.Columns.Add("FirstName");
             tbl_Doctors.Columns.Add("LastName");
             tbl_Doctors.Columns.Add("Specialty");
+            tbl_Doctors.Columns.Add("DeptID");
             tbl_Doctors.Columns.Add("DepartmentName");
 
             SqlCommand cmd = new SqlCommand(@"
@@ -28,6 +29,7 @@ namespace DBProject.Data
                     d.FirstName,
                     d.LastName,
                     d.Specialty,
+                    d.DeptID,
                     dep.DeptName
                 FROM Doctor d
                 INNER JOIN Department dep ON d.DeptID = dep.DeptID
@@ -50,6 +52,7 @@ namespace DBProject.Data
                     row["FirstName"] = reader["FirstName"].ToString();
                     row["LastName"] = reader["LastName"].ToString();
                     row["Specialty"] = reader["Specialty"].ToString();
+                    row["DeptID"] = reader["DeptID"].ToString();
                     row["DepartmentName"] = reader["DeptName"].ToString();
                     tbl_Doctors.Rows.Add(row);
                 }
