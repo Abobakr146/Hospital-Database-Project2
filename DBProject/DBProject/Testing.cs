@@ -9,6 +9,7 @@ namespace DBProject
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
+
             #region Patient Testing
             //PatientRepository patientRepository = new PatientRepository();
             //patientRepository.InsertPatient("4563728", "Ali", "Hamed", new DateTime(2000, 5, 23));
@@ -63,13 +64,18 @@ namespace DBProject
             #endregion
 
             #region Doctor Repository
-            DoctorRepository repo = new DoctorRepository();
+            //DoctorRepository repo = new DoctorRepository();
 
-            repo.TestGetAllDoctors();
+            //repo.TestGetAllDoctors();
 
             #endregion
 
-#
+            #region Presciption Repository
+            PrescribtionRepository repo = new PrescribtionRepository();
+            repo.TestGetAllPrescribtions();
+            #endregion
+
+
         }
     }
 }
