@@ -56,6 +56,7 @@
     <Compile Include="Data\AppointmentRepository.cs" />
     <Compile Include="Data\DatabaseHelper.cs" />
     <Compile Include="Data\DoctorRepository.cs" />
+    <Compile Include="Data\MedicationRepository.cs" />
     <Compile Include="Data\PatientRepository.cs" />
     <Compile Include="Data\PrescribtionRepository.cs" />
     <Compile Include="Models\Appointment.cs" />
