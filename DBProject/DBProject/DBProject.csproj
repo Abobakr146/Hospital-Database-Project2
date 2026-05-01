@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FAEE07BE-CF83-43D0-907C-946D96463C2B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>DBProject</RootNamespace>
     <AssemblyName>DBProject</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DBProject.Testing</StartupObject>
+    <StartupObject>DBProject.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Data\AppointmentRepository.cs" />
     <Compile Include="Data\DatabaseHelper.cs" />
+    <Compile Include="Data\DepartmentRepository.cs" />
     <Compile Include="Data\DoctorRepository.cs" />
     <Compile Include="Data\MedicationRepository.cs" />
     <Compile Include="Data\PatientRepository.cs" />

@@ -79,6 +79,12 @@ namespace DBProject
             //MedicationRepository medRepo = new MedicationRepository();
             //medRepo.TestGetAllMedications();
             #endregion
+
+            #region Department Repository
+            //DepartmentRepository depRepo = new DepartmentRepository();
+            //depRepo.TestGetAllDepartments();
+            //depRepo.TestGetDoctorCountByDepartment();
+            #endregion
         }
     }
 }
