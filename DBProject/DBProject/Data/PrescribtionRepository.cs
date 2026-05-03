@@ -68,6 +68,53 @@ namespace DBProject.Data
             return tbl_Prescribtions;
         }
 
+        public bool InsertPrescribtion(string patientId, short medCode, string docId)
+        {
+            SqlCommand cmd = new SqlCommand(@"
+        INSERT INTO Prescribtion (PatientID, MedCode, DocID, PrescribtionDate) 
+        VALUES (@PatientID, @MedCode, @DocID, @PrescribtionDate)", conn);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@PatientID", patientId);
+            cmd.Parameters.AddWithValue("@MedCode", medCode);
+            cmd.Parameters.AddWithValue("@DocID", docId);
+            cmd.Parameters.AddWithValue("@PrescribtionDate", DateTime.Now);
+
+            try
+            {
+                conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public bool DeletePrescribtion(string patientId, short medCode, string docId)
+        {
+            SqlCommand cmd = new SqlCommand(@"
+        DELETE FROM Prescribtion 
+        WHERE PatientID = @PatientID AND MedCode = @MedCode AND DocID = @DocID", conn);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@PatientID", patientId);
+            cmd.Parameters.AddWithValue("@MedCode", medCode);
+            cmd.Parameters.AddWithValue("@DocID", docId);
+
+            try
+            {
+                conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public void TestGetAllPrescribtions()
         {
             DataTable prescribtions = GetAllPrescribtions();

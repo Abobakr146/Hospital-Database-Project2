@@ -106,6 +106,90 @@ namespace DBProject.Data
             return tbl_Count;
         }
 
+        public bool InsertDepartment(string deptName, string location, string managerDocId = null)
+        {
+            SqlCommand cmd = new SqlCommand(@"
+        INSERT INTO Department (DeptName, Location, Manager_DocID) 
+        VALUES (@DeptName, @Location, @Manager_DocID)", conn);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@DeptName", deptName);
+            cmd.Parameters.AddWithValue("@Location", (object)location ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@Manager_DocID", (object)managerDocId ?? DBNull.Value);
+
+            try
+            {
+                conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public bool UpdateDepartment(short deptId, string deptName = null, string location = null, string managerDocId = null)
+        {
+            string setClause = "";
+
+            if (!string.IsNullOrEmpty(deptName))
+                setClause += "DeptName = @DeptName, ";
+            if (location != null)
+                setClause += "Location = @Location, ";
+            if (managerDocId != null)
+                setClause += "Manager_DocID = @Manager_DocID, ";
+
+            setClause = setClause.TrimEnd(',', ' ');
+
+            SqlCommand cmd = new SqlCommand($@"
+        UPDATE Department 
+        SET {setClause}
+        WHERE DeptID = @DeptID", conn);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@DeptID", deptId);
+
+            if (!string.IsNullOrEmpty(deptName))
+                cmd.Parameters.AddWithValue("@DeptName", deptName);
+            if (location != null)
+                cmd.Parameters.AddWithValue("@Location", location == "" ? DBNull.Value : (object)location);
+            if (managerDocId != null)
+                cmd.Parameters.AddWithValue("@Manager_DocID", managerDocId == "" ? DBNull.Value : (object)managerDocId);
+
+            try
+            {
+                conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public bool DeleteDepartment(short deptId)
+        {
+            SqlCommand cmd = new SqlCommand(@"
+        DELETE FROM Department 
+        WHERE DeptID = @DeptID", conn);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@DeptID", deptId);
+
+            try
+            {
+                conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public void TestGetDoctorCountByDepartment()
         {
             DataTable counts = GetDoctorCountByDepartment();
