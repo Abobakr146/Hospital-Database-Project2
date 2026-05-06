@@ -58,13 +58,25 @@ namespace DBProject.UI
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (IsEditMode)
-                repo.UpdateDepartment(editDeptId, txtName.Text, txtLocation.Text, txtManager.Text);
-            else
-                repo.InsertDepartment(txtName.Text, txtLocation.Text, txtManager.Text);
-            
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            try
+            {
+                string managerId = string.IsNullOrWhiteSpace(txtManager.Text) ? null : txtManager.Text;
+
+                if (IsEditMode)
+                    repo.UpdateDepartment(editDeptId, txtName.Text, txtLocation.Text, managerId);
+                else
+                    repo.InsertDepartment(txtName.Text, txtLocation.Text, managerId);
+                
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("FOREIGN KEY") || ex.Message.Contains("ManagerDocID"))
+                    MessageBox.Show("Invalid Manager ID. Please ensure the Manager Doctor ID exists or leave it blank if no manager is assigned.", "Database Constraint Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show("An error occurred while saving the department:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

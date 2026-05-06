@@ -8,14 +8,32 @@ namespace DBProject.UI
     public class PrescribtionForm : Form
     {
         private PrescribtionRepository repo = new PrescribtionRepository();
+        public bool IsEditMode { get; set; }
+        private string editPatientId;
+        private short editMedCode;
+        private string editDocId;
 
         private Label lblHeader, lblPatientId, lblMedCode, lblDoctorId;
         private TextBox txtPatientId, txtMedCode, txtDoctorId;
         private Button btnSave, btnCancel;
 
-        public PrescribtionForm()
+        public PrescribtionForm(string patientId = "", short medCode = 0, string docId = "")
         {
             InitializeComponents();
+
+            if (!string.IsNullOrEmpty(patientId) && medCode != 0 && !string.IsNullOrEmpty(docId))
+            {
+                IsEditMode = true;
+                editPatientId = patientId;
+                editMedCode = medCode;
+                editDocId = docId;
+
+                txtPatientId.Text = patientId;
+                txtMedCode.Text = medCode.ToString();
+                txtDoctorId.Text = docId;
+                lblHeader.Text = "Edit Prescription";
+                btnSave.Text = "Update Prescription";
+            }
         }
 
         private void InitializeComponents()
@@ -47,7 +65,11 @@ namespace DBProject.UI
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (!short.TryParse(txtMedCode.Text, out short medCode)) { MessageBox.Show("Invalid Med Code"); return; }
-            repo.InsertPrescribtion(txtPatientId.Text, medCode, txtDoctorId.Text);
+            
+            if (IsEditMode)
+                repo.UpdatePrescribtion(editPatientId, editMedCode, editDocId, txtPatientId.Text, medCode, txtDoctorId.Text);
+            else
+                repo.InsertPrescribtion(txtPatientId.Text, medCode, txtDoctorId.Text);
             
             this.DialogResult = DialogResult.OK;
             this.Close();

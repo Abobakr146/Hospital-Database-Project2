@@ -46,6 +46,7 @@ namespace DBProject.UI
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = pureWhite;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = mutedText;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
@@ -167,8 +168,8 @@ namespace DBProject.UI
         {
             lblTitle.Text = "Prescriptions";
             panelActions.Visible = true;
-            btnEditEntity.Visible = false;
-            btnDeleteEntity.Location = new Point(150, btnDeleteEntity.Location.Y);
+            btnEditEntity.Visible = true;
+            btnDeleteEntity.Location = new Point(280, btnDeleteEntity.Location.Y);
             LoadPrescribtions();
         }
 
@@ -380,7 +381,11 @@ namespace DBProject.UI
             }
             else if (lblTitle.Text == "Prescriptions")
             {
-                MessageBox.Show("Editing prescriptions directly is restricted by constraints. Please add or delete instead.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string patientId = row.Cells["PatientID"].Value.ToString();
+                string docId = row.Cells["DocID"].Value.ToString();
+                short medCode = Convert.ToInt16(row.Cells["MedCode"].Value);
+
+                if (ShowVercelModal(new PrescribtionForm(patientId, medCode, docId))) LoadPrescribtions();
             }
         }
 
