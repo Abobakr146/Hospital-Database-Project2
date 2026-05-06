@@ -68,6 +68,18 @@
     <Compile Include="Models\PatientPhone.cs" />
     <Compile Include="Models\Prescribtion.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="UI\DepartmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MedicationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\PrescribtionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

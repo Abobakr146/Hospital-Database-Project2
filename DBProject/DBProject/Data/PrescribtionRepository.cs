@@ -16,6 +16,9 @@ namespace DBProject.Data
         {
             DataTable tbl_Prescribtions = new DataTable();
 
+            tbl_Prescribtions.Columns.Add("PatientID");
+            tbl_Prescribtions.Columns.Add("DocID");
+            tbl_Prescribtions.Columns.Add("MedCode");
             tbl_Prescribtions.Columns.Add("PatientName");
             tbl_Prescribtions.Columns.Add("MedicationName");
             tbl_Prescribtions.Columns.Add("Dosage");
@@ -25,6 +28,9 @@ namespace DBProject.Data
 
             SqlCommand cmd = new SqlCommand(@"
                 SELECT 
+                    pr.PatientID,
+                    pr.DocID,
+                    pr.MedCode,
                     p.FirstName + ' ' + p.LastName AS PatientName,
                     m.MedName,
                     m.Dosage,
@@ -50,6 +56,9 @@ namespace DBProject.Data
                 while (reader.Read())
                 {
                     row = tbl_Prescribtions.NewRow();
+                    row["PatientID"] = reader["PatientID"].ToString();
+                    row["DocID"] = reader["DocID"].ToString();
+                    row["MedCode"] = reader["MedCode"].ToString();
                     row["PatientName"] = reader["PatientName"].ToString();
                     row["MedicationName"] = reader["MedName"].ToString();
                     row["Dosage"] = reader["Dosage"].ToString();

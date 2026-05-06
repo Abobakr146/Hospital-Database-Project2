@@ -20,6 +20,8 @@ namespace DBProject.Data
             tbl_Appointments.Columns.Add("ApptDate");
             tbl_Appointments.Columns.Add("ApptTime");
             tbl_Appointments.Columns.Add("Status");
+            tbl_Appointments.Columns.Add("PatientID");
+            tbl_Appointments.Columns.Add("DoctorID");
             tbl_Appointments.Columns.Add("PatientName");
             tbl_Appointments.Columns.Add("DoctorName");
 
@@ -29,6 +31,8 @@ namespace DBProject.Data
                     a.ApptDate,
                     a.ApptTime,
                     a.Status,
+                    a.PatientID,
+                    a.DoctorID,
                     p.FirstName + ' ' + p.LastName AS PatientName,
                     d.FirstName + ' ' + d.LastName AS DoctorName
                 FROM Appointment a
