@@ -106,8 +106,13 @@ namespace DBProject.Data
             return tbl_Count;
         }
 
-        public bool InsertDepartment(string deptName, string location, string managerDocId = null)
+        public bool InsertDepartment(string deptName, string location, string managerDocId)
         {
+            if (string.IsNullOrEmpty(managerDocId))
+            {
+                throw new ArgumentException("Manager ID is required. Department must have a manager.");
+            }
+
             SqlCommand cmd = new SqlCommand(@"
         INSERT INTO Department (DeptName, Location, Manager_DocID) 
         VALUES (@DeptName, @Location, @Manager_DocID)", conn);
@@ -115,7 +120,7 @@ namespace DBProject.Data
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@DeptName", deptName);
             cmd.Parameters.AddWithValue("@Location", (object)location ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@Manager_DocID", (object)managerDocId ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@Manager_DocID", managerDocId);
 
             try
             {
