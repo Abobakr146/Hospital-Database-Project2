@@ -101,6 +101,40 @@ namespace DBProject.Data
             }
         }
 
+        public bool UpdatePrescribtion(string oldPatientId, short oldMedCode, string oldDocId,
+                                       string newPatientId, short newMedCode, string newDocId)
+        {
+            SqlCommand cmd = new SqlCommand(@"
+        UPDATE Prescribtion 
+        SET PatientID = @NewPatientID, 
+            MedCode = @NewMedCode, 
+            DocID = @NewDocID,
+            PrescribtionDate = @PrescribtionDate
+        WHERE PatientID = @OldPatientID 
+          AND MedCode = @OldMedCode 
+          AND DocID = @OldDocID", conn);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@NewPatientID", newPatientId);
+            cmd.Parameters.AddWithValue("@NewMedCode", newMedCode);
+            cmd.Parameters.AddWithValue("@NewDocID", newDocId);
+            cmd.Parameters.AddWithValue("@PrescribtionDate", DateTime.Now);
+            cmd.Parameters.AddWithValue("@OldPatientID", oldPatientId);
+            cmd.Parameters.AddWithValue("@OldMedCode", oldMedCode);
+            cmd.Parameters.AddWithValue("@OldDocID", oldDocId);
+
+            try
+            {
+                conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public bool DeletePrescribtion(string patientId, short medCode, string docId)
         {
             SqlCommand cmd = new SqlCommand(@"
