@@ -82,7 +82,7 @@ namespace DBProject.Data
             pp.Phone
         FROM Patient p
         LEFT JOIN Patient_Phone pp ON p.PatientID = pp.PatientID
-        ORDER BY p.LastName, p.FirstName", conn);
+        ORDER BY p.PatientID", conn);
 
             cmd.CommandType = CommandType.Text;
 
